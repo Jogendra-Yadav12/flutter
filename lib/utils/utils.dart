@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:another_flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mvvm_provider_setup/app/app_strings.dart';
 
 class Utils {
   static void fieldFocusChange(
@@ -72,7 +73,7 @@ class Utils {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("ok"),
+          child: const Text(AppString.ok),
         ),
       ],
     );

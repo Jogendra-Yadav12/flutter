@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_provider_setup/app/routes/routes.dart';
 import 'package:mvvm_provider_setup/app/routes/routes_name.dart';
 import 'package:mvvm_provider_setup/view_model/auth_view_model.dart';
+import 'package:mvvm_provider_setup/view_model/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthViewModel(),
+        ),
+         ChangeNotifierProvider(
+          create: (_) => LoginViewModel(),
         ),
       ],
       builder: (context, child) {

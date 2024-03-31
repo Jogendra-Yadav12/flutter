@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mvvm_provider_setup/app/app_strings.dart';
+import 'package:mvvm_provider_setup/app/routes/routes_name.dart';
 import 'package:mvvm_provider_setup/utils/utils.dart';
 import 'package:mvvm_provider_setup/view/widgets/button/rectangle_button.dart';
 import 'package:mvvm_provider_setup/view/widgets/text_field/custom_text_field.dart';
 import 'package:mvvm_provider_setup/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AuthViewModel authViewModel = AuthViewModel();
+    final authViewModel = Provider.of<AuthViewModel>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -83,18 +85,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Please fill all the fields",
                     );
                   } else {
-                    // Map<String, String> loginCredential = {
-                    //   "email": "eve.holt@reqres.in",
-                    //   "password": "cityslicka"
-                    // };
                     Map<String, String> loginCredential = {
-                      "email": _emailController.text.trim().toString(),
-                      "password": _passwordController.text.trim().toString()
+                      "email": "eve.holt@reqres.in",
+                      "password": "cityslicka"
                     };
+                    // Map<String, String> loginCredential = {
+                    //   "email": _emailController.text.trim().toString(),
+                    //   "password": _passwordController.text.trim().toString()
+                    // };
                     authViewModel.loginApi(loginCredential, context);
                   }
                 },
                 buttonName: AppString.login,
+              ),
+              const Gap(20),
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RoutesName.signUpScreen,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text("Don't have an account? SignUp"),
+                ),
               ),
             ],
           ),

@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:mvvm_provider_setup/app/routes/routes_name.dart';
+import 'package:mvvm_provider_setup/app/app_colors.dart';
+
+import 'package:mvvm_provider_setup/view_model/session_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,22 +13,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SessionService sp = SessionService();
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        Navigator.pushNamed(context, RoutesName.signUpScreen);
-      },
-    );
+    Timer(const Duration(seconds: 2), () {
+      sp.checkAuthentication(context);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("spalsh"),
+        child: Icon(Icons.abc,color: AppColor.white,)
       ),
     );
   }

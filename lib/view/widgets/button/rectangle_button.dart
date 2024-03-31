@@ -9,7 +9,7 @@ class RectangleButton extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.buttonName,
-    required this.loading,
+    this.loading=false,
   });
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_provider_setup/app/app_strings.dart';
 import 'package:mvvm_provider_setup/app/routes/routes_name.dart';
 import 'package:mvvm_provider_setup/view/screens/home_screen.dart';
 import 'package:mvvm_provider_setup/view/screens/login_screen.dart';
@@ -38,7 +39,7 @@ class Routes {
           builder: (_) {
             return const Scaffold(
               body: Center(
-                child: Text("No Route"),
+                child: Text(AppString.noRoute),
               ),
             );
           },
