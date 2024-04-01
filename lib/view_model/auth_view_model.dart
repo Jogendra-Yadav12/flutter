@@ -3,6 +3,7 @@ import 'package:mvvm_provider_setup/app/app_strings.dart';
 import 'package:mvvm_provider_setup/app/routes/routes_name.dart';
 import 'package:mvvm_provider_setup/repository/auth_repository.dart';
 import 'package:mvvm_provider_setup/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewModel with ChangeNotifier {
   final _authRepo = AuthRepository();
@@ -27,9 +28,13 @@ class AuthViewModel with ChangeNotifier {
   Future<void> loginApi(dynamic loginCredential, BuildContext context) async {
     setLoginLoading(true);
 
-    _authRepo.loginApi(loginCredential).then((value) {
+    _authRepo.loginApi(loginCredential).then((value) async {
       setLoginLoading(false);
-
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      String token = value["token"].toString();
+      sharedPreferences.setString("token", token);
+      if (!context.mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.homeScreen,
@@ -47,14 +52,8 @@ class AuthViewModel with ChangeNotifier {
   Future<void> signUpApi(dynamic signUpCredential, BuildContext context) async {
     setSignUpLoading(true);
 
-    // final SharedPreferences sharedPreferences =
-    //     await SharedPreferences.getInstance();
-
     _authRepo.signUpApi(signUpCredential).then((value) {
       setSignUpLoading(false);
-
-      // String token = value["token"].toString();
-      // sharedPreferences.setString("token", token);
 
       Navigator.pushNamedAndRemoveUntil(
         context,

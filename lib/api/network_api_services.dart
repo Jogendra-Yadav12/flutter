@@ -8,13 +8,12 @@ import 'package:mvvm_provider_setup/app/app_strings.dart';
 class NetworkApiServices extends BaseApiServices {
   // ---------------------------- GET API ----------------------------
   @override
-  Future getApiResponse(String url, dynamic header) async {
+  Future getApiResponse(String url) async {
     dynamic responseJson;
     try {
       final response = await http
           .get(
             Uri.parse(url),
-            headers: header,
           )
           .timeout(
             const Duration(seconds: 30),
